@@ -9,6 +9,7 @@ const forecast = (latitude, longitude, callback) => {
    }, (error, { body }) => { // was response instead of {body} ex. response.body...
       const temperature = body.currently.temperature
       const precipProbability = body.currently.precipProbability
+      const humidity = body.currently.humidity
       const summary = body.daily.data[0].summary
 
       if (error) {
@@ -17,7 +18,7 @@ const forecast = (latitude, longitude, callback) => {
          callback(body.error)
       } else {
          callback(undefined,  
-            `${summary} It is currently ${temperature} degrees fahrenheit outside. There is a ${precipProbability}% chance of rain.`
+            `${summary} It is currently ${temperature} degrees fahrenheit outside. There is a ${precipProbability}% chance of rain. Humidity is at ${humidity * 100}%`
          )
       }
    })
